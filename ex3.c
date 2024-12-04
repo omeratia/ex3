@@ -36,7 +36,7 @@ void insertDailyData(int cube[DAYS_IN_YEAR][NUM_OF_BRANDS][NUM_OF_TYPES], int da
 int checkPositiveValues(int salesData[NUM_OF_TYPES]);
 int sumDailySales(int dayInput, int cube[DAYS_IN_YEAR][NUM_OF_BRANDS][NUM_OF_TYPES]);
 void bestSoldBrand(int dayInput, int cube[DAYS_IN_YEAR][NUM_OF_BRANDS][NUM_OF_TYPES]);
-int findMaxBrand(int brandSales[NUM_OF_BRANDS]);
+int findMaxBrand(int brandSales[NUM_OF_BRANDS], int numOfBrands);//
 void bestSoldType(int dayInput, int cube[DAYS_IN_YEAR][NUM_OF_BRANDS][NUM_OF_TYPES]);
 int findMaxType(int typeSales[NUM_OF_TYPES]);
 void printDataset(int cube[DAYS_IN_YEAR][NUM_OF_BRANDS][NUM_OF_TYPES], char brands[NUM_OF_BRANDS][BRANDS_NAMES],char types[NUM_OF_TYPES][TYPES_NAMES], int currentDay);
@@ -224,7 +224,7 @@ void bestSoldBrand(int dayInput, int cube[DAYS_IN_YEAR][NUM_OF_BRANDS][NUM_OF_TY
         }
     }
     //Now we must find the max item in our sales array, using the findMax function.
-    int maxIndex = findMaxBrand(brandsSales);
+    int maxIndex = findMaxBrand(brandsSales, NUM_OF_BRANDS);
     printf("The best sold brand with %d sales was %s\n", brandsSales[maxIndex], brands[maxIndex]);
 }
 
@@ -246,7 +246,7 @@ void bestSoldType(int dayInput, int cube[DAYS_IN_YEAR][NUM_OF_BRANDS][NUM_OF_TYP
     //with the types indexes
 }
 
-int findMaxBrand(int brandSales[NUM_OF_BRANDS]){
+int findMaxBrand(int brandSales[NUM_OF_BRANDS], int numOfBrands){
     //Function that gets an array of the brand sales, iterating over each item and concluding 
     // what index holds the greatest number, hence what brand has sold the most
     int currentLeader = 0;//Starting at the first index as our current leader
@@ -318,7 +318,7 @@ void bestSoldBrandOverall (int cube[DAYS_IN_YEAR][NUM_OF_BRANDS][NUM_OF_TYPES], 
         brandSumsOverall[i] = sumBrandTotalSales(cube, currentDay, i); //using function from previous cases in the program, now it will sum all the sales
         //of each brand until our current day and will put in under the brand's index in our array inside the function
     }
-    int topBrandIndex = findMaxBrand(brandSumsOverall); //returns the index of the most sales, hence which is the most selling brand
+    int topBrandIndex = findMaxBrand(brandSumsOverall, NUM_OF_BRANDS); //returns the index of the most sales, hence which is the most selling brand
     printf("The best-selling brand overall is %s: %d$\n", brands[topBrandIndex], brandSumsOverall[topBrandIndex]); //printing the top brand name from the
     //brands array and it sales sum from the array
 }
